@@ -1,12 +1,13 @@
-//02.11.23 Two Home Work - Perekhod I.S
-//Interactive-calculator
+//20.02.23 - Perekhod I.S
+//Interactive-calculator + fluent
 
 #include <iostream>
+#include "calculate.h"
 
 int main()
 {
-	std::cout << "Hello, Me - Interactive Calculator by Perekhod v0.1!\n\n";
-repeat: // Return if the user wants to continue using the calculator (lines 12 and 115)
+	std::cout << "Hello, Me - Interactive Calculator by Perekhod v1.1!\n\n";
+repeat: // Return if the user wants to continue using the calculator (lines 10 and 93)
 	std::cout << "Please enter two integers on which the mathematical operations will be performed:\n";
 
 	int numberOne, numberTwo;
@@ -22,15 +23,15 @@ repeat: // Return if the user wants to continue using the calculator (lines 12 a
 	switch (menu)
 	{
 	case '+':
-		std::cout << numberOne << " + " << numberTwo << " = " << numberOne + numberTwo << "\n";
+		std::cout << numberOne << " + " << numberTwo << " = " << sum(numberOne,numberTwo) << "\n";
 		break;
 
 	case '-':
-		std::cout << numberOne << " - " << numberTwo << " = " << numberOne - numberTwo << "\n";
+		std::cout << numberOne << " - " << numberTwo << " = " << diff(numberOne, numberTwo) << "\n";
 		break;
 
 	case '*':
-		std::cout << numberOne << " * " << numberTwo << " = " << numberOne * numberTwo << "\n";
+		std::cout << numberOne << " * " << numberTwo << " = " << multiplication(numberOne, numberTwo) << "\n";
 		break;
 
 	case '/':
@@ -40,64 +41,44 @@ repeat: // Return if the user wants to continue using the calculator (lines 12 a
 			std::cin >> numberTwo;
 			goto zero;
 		}
-	zero:// Return if user divides by 0(44 and 46 row)
-		std::cout << numberOne << " / " << numberTwo << " = " << numberOne / numberTwo << "\n";
+	zero:// Return if user divides by 0(44 and 42 )
+		std::cout << numberOne << " / " << numberTwo << " = " << cleavage(numberOne, numberTwo) << "\n";
 		break;
 
 	case '!':
 		std::cout << "You requested the 'Factorial' operation, but it only works on one number, and you entered two.\n";
+		Factrepeat:
 		std::cout << "From what number will we calculate the 'Factorial'? " << numberOne << " or " << numberTwo << " ? \n";
-
-		int value, factorial;
-		std::cin >> value;
-		factorial = 1;
-
-	repeatfact:  // Return if the user entered neither a nor b (lines 58 and 82)
-		if (value == numberOne)
+		int temp;
+		std::cin >> temp;
+		if (temp==numberOne)
 		{
-			for (int i = 1; i <= value; i++)
-			{
-				factorial *= i;
-			}
-			std::cout << "Factorial of a number " << value << " = " << factorial << "\n";
+			std::cout << "Factorial of a number " << numberOne << " = " << fact(numberOne) << "\n";
 			break;
 		}
-		else if (value == numberTwo)
+		else if (temp == numberTwo)
 		{
-			for (int j = 1; j <= value; j++)
-			{
-				factorial *= j;
-			}
-			std::cout << "Factorial of a number " << value << " = " << factorial << "\n";
+			std::cout << "Factorial of a number " << numberTwo << " = " << fact(numberTwo) << "\n";
 			break;
 		}
 		else
 		{
-			std::cout << "Oops, you entered a different number!\n";
-			std::cout << "Enter " << numberOne << " or " << numberTwo << "\n";
-			std::cin >> value;
-			goto repeatfact;
-			break;
+			std::cout << "Oops!Enter " << numberOne << " or " << numberTwo << " ! " << std::endl;
+			goto Factrepeat;
 		}
 
-	case '^':
-	{
-		int i = 1, extent = 1;
-		while (i <= numberTwo)
+		case '^':
 		{
-			extent *= numberOne;
-			i++;
+			std::cout << numberOne << " to the extent " << numberTwo << " = " << exp(numberOne,numberTwo) << "\n";
+			break;
 		}
-		std::cout << numberOne << " to the extent " << numberTwo << " = " << extent << "\n";
-		break;
-	}
-	default:
-		std::cout << "\nOops... This symbol does not apply to implemented operations in the version 1.0!\n\n";
-	}
+		default:
+			std::cout << "\nOops... This symbol does not apply to implemented operations in the version 1.1!\n\n";
+		}
 
 	std::cout << "To exit the interactive calculator press 'q', for the next operation 'r'\n";
 
-inccorect:// Return if the user entered the wrong character (lines 103 and 121)
+inccorect:// Return if the user entered the wrong character (lines 81 and 99)
 
 	char end;
 	std::cin >> end;
